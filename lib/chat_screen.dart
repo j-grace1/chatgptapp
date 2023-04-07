@@ -15,6 +15,22 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final bool _isTyping = true;
+
+late  TextEditingController textEditingController;
+
+@override
+  void initState() {
+    // TODO: implement initState
+  textEditingController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,8 +38,12 @@ class _ChatScreenState extends State<ChatScreen> {
         padding: const EdgeInsets.all(0.0),
         child: Image.asset(AssetsManager.botImage),
 
+
       ),
       title: Text('ChatGpt'),
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.more_vert_rounded), color: Colors.white,)
+        ],
       ),
       body: SafeArea(
         child: Column(children: [
@@ -39,6 +59,25 @@ class _ChatScreenState extends State<ChatScreen> {
             const SpinKitThreeBounce(
               color: Colors.white,
               size: 16,
+            ),
+            SizedBox(height: 2,),
+            
+            
+            Material(
+              color: cardColor,
+              child: Row(
+              children: [
+                 Expanded(child: TextField(controller: textEditingController,
+                  onSubmitted: (value){
+
+                  },
+                  decoration: InputDecoration.collapsed(hintText: 'How can i help you', hintStyle: TextStyle(color: Colors.grey)),)),
+                IconButton(onPressed:  () {},
+                    icon: Icon(Icons.send),
+                color: Colors.white,
+                )
+              ],
+              ),
             )
           ]
         ],),
